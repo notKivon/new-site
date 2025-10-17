@@ -1,35 +1,246 @@
-@import './base.css';
+/* 1. CSS Variables & Global Styles
+--------------------------------------------*/
+:root {
+  /* Fonts */
+  --font-headline: 'Space Grotesk', sans-serif;
+  --font-body: 'IBM Plex Sans', sans-serif;
 
-#app {
-  max-width: 1280px;
+  /* Colors */
+  --color-dark-blue: #0A2342;
+  --color-off-white: #F8F9FA;
+  --color-text: #333;
+  --color-text-light: #555;
+  --color-accent: #00BFFF; /* Electric Blue Accent */
+  --color-border: #E0E0E0;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-text);
+  background-color: var(--color-off-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
+  padding: 0 1.5rem;
 }
 
-a,
-.green {
+h1, h2, h3 {
+  font-family: var(--font-headline);
+  font-weight: 700;
+  color: var(--color-dark-blue);
+  letter-spacing: -0.5px;
+}
+
+h1 { font-size: 3.5rem; line-height: 1.1; }
+h2 { font-size: 2.5rem; text-align: center; margin-bottom: 3rem; }
+h3 { font-size: 1.5rem; margin-bottom: 0.75rem; }
+p { color: var(--color-text-light); margin-bottom: 1rem; }
+
+
+/* 2. Reusable Components (Buttons)
+--------------------------------------------*/
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.75rem;
+  border-radius: 6px;
   text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+.btn-primary {
+  background-color: var(--color-accent);
+  color: var(--color-dark-blue);
+}
+.btn-primary:hover {
+  background-color: transparent;
+  border-color: var(--color-accent);
+  color: var(--color-accent);
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
+.btn-secondary {
+  background-color: transparent;
+  color: var(--color-dark-blue);
+  border-color: var(--color-border);
+}
+.btn-secondary:hover {
+  background-color: var(--color-dark-blue);
+  color: white;
+  border-color: var(--color-dark-blue);
+}
 
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
+
+/* 3. Header & Navigation
+--------------------------------------------*/
+.site-header {
+  padding: 1.5rem 0;
+  background-color: var(--color-off-white);
+}
+
+.site-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: 2rem;
+  color: var(--color-dark-blue);
+  text-decoration: none;
+  letter-spacing: -1px;
+}
+
+
+/* 4. Page Sections
+--------------------------------------------*/
+.section {
+  padding: 6rem 0;
+}
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  padding: 7rem 0;
+}
+.hero h1 {
+  max-width: 800px;
+  margin: 0 auto 1.5rem;
+}
+.hero .subtitle {
+  font-size: 1.25rem;
+  max-width: 600px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.5;
+}
+.hero .cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* Trusted By Section */
+.trusted-by {
+  padding-bottom: 6rem;
+}
+.trusted-by .section-title {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #999;
+  margin-bottom: 2rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.trusted-by .logos {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 2rem;
+  filter: grayscale(100%);
+  opacity: 0.6;
+}
+.trusted-by .logos span {
+  font-family: var(--font-headline);
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+/* Services Section */
+.services {
+  background-color: #fff;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
+}
+.service-card {
+  text-align: left;
+}
+.service-card .icon {
+  margin-bottom: 1.5rem;
+  color: var(--color-accent);
+}
+
+/* Testimonial Section */
+.testimonial {
+  background-color: var(--color-dark-blue);
+  color: white;
+}
+.testimonial blockquote {
+  text-align: center;
+  border: 0;
+  margin: 0 auto;
+  max-width: 800px;
+}
+.testimonial blockquote p {
+  font-family: var(--font-headline);
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: white;
+  margin-bottom: 2rem;
+}
+.testimonial blockquote footer {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ccc;
+}
+.testimonial blockquote footer span {
+  color: #999;
+}
+
+
+/* Final CTA Section */
+.final-cta {
+  text-align: center;
+}
+.final-cta p {
+  max-width: 500px;
+  margin: 0 auto 2rem;
+  font-size: 1.1rem;
+}
+
+/* Footer */
+.site-footer {
+  padding: 2rem 0;
+  text-align: center;
+  border-top: 1px solid var(--color-border);
+}
+.site-footer p {
+  font-size: 0.9rem;
+  color: #888;
+  margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  h1 { font-size: 2.5rem; }
+  h2 { font-size: 2rem; }
+  .section { padding: 4rem 0; }
+  .hero { padding: 4rem 0; }
+  .hero .cta-buttons { flex-direction: column; }
+  .trusted-by .logos { flex-wrap: wrap; }
 }
